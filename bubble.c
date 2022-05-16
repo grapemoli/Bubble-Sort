@@ -1,20 +1,26 @@
-//bubble.c
+//bubble.c 
 //famous bubble sort
 //implement the swap algorithm with pointers
+//randomly generates values array
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #define MAX 9
 
 //input to work with
-int values[] = {7, 3, 9, 4, 6, 1, 2, 8, 5};
+int values[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 //function prototypes
+int isIn(int);
+void generateValues();
 void printValues();
 void sort();
 void swap(int*, int*);
 
 //main function
 int main(){
+  generateValues();
   printf("Before: \n");
   printValues();
   sort();
@@ -24,7 +30,44 @@ int main(){
   return(0);
 } //end main
 
-//functions
+//function
+int isIn(int number){
+  //returns 1 if number is in values; 0 if number is not 
+  int index;
+  
+  for(index = 0; index < MAX; index++){
+
+    if(values[index] == number){
+      return(1);
+      index = 9;
+    }else{
+      if(index == 8){
+	return(0);
+      } //end if
+    } //end if
+	  
+  } //end for
+} //end isIn
+
+void generateValues(){
+  //generates a random integer. if the random integer is not in the values array, 
+  //swap the random integer with a placeholder
+  int index = 0;
+  int i;
+
+  time_t t;
+  srand((unsigned) time(&t));  
+
+  for(i = 0; i < 20; i++){
+    int randomInt = (rand() % 100) +  1;
+
+    if(isIn(randomInt) == 0){
+      swap(&values[index], &randomInt);
+      index++;
+    } //end if
+  } //end for
+} //end generateValues
+
 void printValues(){
   //print the values array
   printf("[");
@@ -55,8 +98,7 @@ void sort(){
       if(values[j] > values[j + 1]){
         swap(&values[j], &values[j + 1]);
 	printValues();
-      } //end if
+      } //end if 
     } //end for
   } //end for
-} //end sort
-
+} //end sort  
