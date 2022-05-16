@@ -71,8 +71,8 @@ void generateValues(){
 void printValues(){
   //print the values array
   printf("[");
-
   int index; 
+	
   for(index = 0; index < MAX; index++){
     printf(" %d", values[index]);
   } //end for
@@ -81,8 +81,6 @@ void printValues(){
 } //end printValues
 
 void swap(int* high, int* low){
-  //switch the values at two pointers
-  //let holdValue get high's value, let high get low's value, let low get high's value
   int holdValue = *high; 
   *high = *low;
   *low = holdValue;
